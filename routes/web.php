@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelolaDataSiswaController;
+use App\Http\Controllers\KelolaGuruController;
+use App\Http\Controllers\KelolaMapelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,17 +27,24 @@ Route::group(['middleware' => 'role:Admin'], function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     });
+
     Route::get('/admin/kelola-siswa', [KelolaDataSiswaController::class, 'index']);
     Route::post('/admin/add-siswa', [KelolaDataSiswaController::class, 'store']);
     Route::put('/admin/update-siswa/{id}', [KelolaDataSiswaController::class, 'update']);
     Route::delete('/admin/delete-siswa/{id}', [KelolaDataSiswaController::class, 'destroy']);
     Route::put('/admin/reset-password-siswa/{id}', [KelolaDataSiswaController::class, 'reset_password']);
-    Route::get('/admin/kelola-mapel', function(){
-        return view('admin.kelola-mapel');
-    });
-    Route::get('/admin/kelola-guru', function(){
-        return view('admin.kelola-guru');
-    });
+
+    Route::get('/admin/kelola-mapel', [KelolaMapelController::class, 'index']);
+    Route::post('/admin/add-mapel', [KelolaMapelController::class, 'store']);
+    Route::put('/admin/update-mapel/{id}', [KelolaMapelController::class, 'update']);
+    Route::delete('/admin/delete-mapel/{id}', [KelolaMapelController::class, 'destroy']);
+
+    Route::get('/admin/kelola-guru', [KelolaGuruController::class, 'index']);
+    Route::post('/admin/add-guru', [KelolaGuruController::class, 'store']);
+    Route::put('/admin/update-guru/{id}', [KelolaGuruController::class, 'update']);
+    Route::delete('/admin/delete-guru/{id}', [KelolaGuruController::class, 'destroy']);
+    Route::put('/admin/reset-password-guru/{id}', [KelolaGuruController::class, 'reset_password']);
+
     Route::get('/admin/kelola-nilai', function(){
         return view('admin.kelola-nilai');
     });

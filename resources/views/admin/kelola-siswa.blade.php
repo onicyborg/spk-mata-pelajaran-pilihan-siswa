@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>NISN</th>
                         <th>Nama</th>
                         <th>Gender</th>
                         <th>Jurusan</th>
@@ -37,6 +38,7 @@
                     @foreach ($data as $no => $item)
                         <tr>
                             <td>{{ $no + 1 }}</td>
+                            <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->biodata != null ? $item->biodata->gender : '-' }}</td>
                             <td>{{ $item->biodata != null ? $item->biodata->jurusan : '-' }}</td>
