@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->string('jurusan')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('mapel_fav');
+            $table->unsignedBigInteger('mapel_fav')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

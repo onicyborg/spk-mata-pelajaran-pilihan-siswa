@@ -36,6 +36,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    @stack('styles')
 </head>
 
 <body>
@@ -224,6 +225,8 @@
             fillColor: "rgba(255, 165, 52, .14)",
         });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>
