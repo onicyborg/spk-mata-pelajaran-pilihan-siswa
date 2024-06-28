@@ -6,6 +6,7 @@ use App\Models\MataPelajaran;
 use App\Models\Nilai;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KelolaNilaiController extends Controller
 {
@@ -14,7 +15,13 @@ class KelolaNilaiController extends Controller
         $data = User::where('role', 'Siswa')->get();
         $mapel = MataPelajaran::all();
 
-        return view('admin.kelola-nilai', ['data' => $data, 'mapel' => $mapel]);
+        if(Auth::user()->role == 'Admin'){
+            return view('admin.kelola-nilai', ['data' => $data, 'mapel' => $mapel]);
+        }else if(Auth::user()->role == 'Guru'){
+            return view('guru.kelola-nilai', ['data' => $data, 'mapel' => $mapel]);
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 
     public function detail_nilai($id)
@@ -23,7 +30,13 @@ class KelolaNilaiController extends Controller
         $data = MataPelajaran::all();
         $nilai = Nilai::all();
 
-        return view('admin.detail-nilai', ['siswa' => $siswa, 'data' => $data, 'nilai' => $nilai]);
+        if(Auth::user()->role == 'Admin'){
+            return view('admin.detail-nilai', ['siswa' => $siswa, 'data' => $data, 'nilai' => $nilai]);
+        }else if(Auth::user()->role == 'Guru'){
+            return view('guru.detail-nilai', ['siswa' => $siswa, 'data' => $data, 'nilai' => $nilai]);
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 
     public function store_nilai(Request $request)
@@ -35,7 +48,13 @@ class KelolaNilaiController extends Controller
         $nilai->nilai = $request->nilai;
         $nilai->save();
 
-        return redirect('/admin/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Menambahkan Nilai');
+        if(Auth::user()->role == 'Admin'){
+            return redirect('/admin/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Menambahkan Nilai');
+        }else if(Auth::user()->role == 'Guru'){
+            return redirect('/guru/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Menambahkan Nilai');
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 
     public function update_nilai(Request $request, $id)
@@ -45,6 +64,12 @@ class KelolaNilaiController extends Controller
         $nilai->nilai = $request->nilai;
         $nilai->save();
 
-        return redirect('/admin/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Memperbarui Nilai');
+        if(Auth::user()->role == 'Admin'){
+            return redirect('/admin/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Memperbarui Nilai');
+        }else if(Auth::user()->role == 'Guru'){
+            return redirect('/guru/penilaian-siswa/'. $request->user_id)->with('success', 'Berhasil Memperbarui Nilai');
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 }

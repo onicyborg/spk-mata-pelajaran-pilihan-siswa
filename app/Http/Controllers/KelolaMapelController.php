@@ -18,6 +18,8 @@ class KelolaMapelController extends Controller
     {
         $request->validate([
             'nama_mapel' => 'required'
+        ],[
+            'nama_mapel.required' => 'Nama mata pelajaran harus diisi.'
         ]);
 
         $data = new MataPelajaran();
@@ -33,6 +35,8 @@ class KelolaMapelController extends Controller
     {
         $request->validate([
             'nama_mapel' => 'required'
+        ],[
+            'nama_mapel.required' => 'Nama mata pelajaran harus diisi.'
         ]);
 
         $data = MataPelajaran::find($id);

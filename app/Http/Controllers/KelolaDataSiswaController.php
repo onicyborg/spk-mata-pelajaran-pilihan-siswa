@@ -28,7 +28,18 @@ class KelolaDataSiswaController extends Controller
             'kelas' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ], [
+            'name.required' => 'Nama harus diisi.',
+            'username.required' => 'NISN harus diisi.',
+            'username.unique' => 'NISN sudah terdaftar.',
+            'gender.required' => 'Jenis kelamin harus dipilih.',
+            'gender.in' => 'Jenis kelamin harus Pria atau Wanita.',
+            'jurusan.required' => 'Jurusan harus dipilih.',
+            'kelas.required' => 'Kelas harus dipilih.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
+
 
         $data = new User();
         $biodata = new Biodata();
@@ -70,6 +81,17 @@ class KelolaDataSiswaController extends Controller
             'kelas' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ],
+        [
+            'name.required' => 'Nama harus diisi.',
+            'username.required' => 'NISN harus diisi.',
+            'username.unique' => 'NISN sudah terdaftar.',
+            'gender.required' => 'Jenis kelamin harus dipilih.',
+            'gender.in' => 'Jenis kelamin harus Pria atau Wanita.',
+            'jurusan.required' => 'Jurusan harus dipilih.',
+            'kelas.required' => 'Kelas harus dipilih.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
 
         // Mencari data user berdasarkan id

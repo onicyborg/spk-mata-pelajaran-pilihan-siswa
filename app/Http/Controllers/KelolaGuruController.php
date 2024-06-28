@@ -25,7 +25,16 @@ class KelolaGuruController extends Controller
             'gender' => 'required|in:Pria,Wanita',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ], [
+            'name.required' => 'Nama harus diisi.',
+            'username.required' => 'NIP harus diisi.',
+            'username.unique' => 'NIP sudah terdaftar.',
+            'gender.required' => 'Jenis kelamin harus dipilih.',
+            'gender.in' => 'Jenis kelamin harus Pria atau Wanita.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
+
 
         $data = new User();
         $biodata = new Biodata();
@@ -60,6 +69,15 @@ class KelolaGuruController extends Controller
             'gender' => 'required|in:Pria,Wanita',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ],
+        [
+            'name.required' => 'Nama harus diisi.',
+            'username.required' => 'NIP harus diisi.',
+            'username.unique' => 'NIP sudah terdaftar.',
+            'gender.required' => 'Jenis kelamin harus dipilih.',
+            'gender.in' => 'Jenis kelamin harus Pria atau Wanita.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
 
         // Mencari data user berdasarkan id

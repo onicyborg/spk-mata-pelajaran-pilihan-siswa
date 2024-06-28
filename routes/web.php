@@ -5,6 +5,7 @@ use App\Http\Controllers\KelolaDataSiswaController;
 use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaMapelController;
 use App\Http\Controllers\KelolaNilaiController;
+use App\Http\Controllers\KelolaProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,8 +63,17 @@ Route::group(['middleware' => 'role:Guru'], function () {
     Route::get('/guru/dashboard', function () {
         return view('guru.dashboard');
     });
+
+    Route::get('/guru/kelola-nilai', [KelolaNilaiController::class, 'index']);
+    Route::get('/guru/penilaian-siswa/{id}', [KelolaNilaiController::class, 'detail_nilai']);
+    Route::post('/guru/input-nilai', [KelolaNilaiController::class, 'store_nilai']);
+    Route::put('/guru/update-nilai/{id}', [KelolaNilaiController::class, 'update_nilai']);
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [KelolaProfileController::class, 'index']);
+    Route::put('/update-profile', [KelolaProfileController::class, 'update']);
+    Route::put('/ubah-password', [KelolaProfileController::class, 'ubah_password']);
+    Route::post('/update-foto-profile', [KelolaProfileController::class, 'avatar']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });

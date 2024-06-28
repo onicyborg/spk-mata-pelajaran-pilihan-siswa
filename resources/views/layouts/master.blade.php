@@ -76,8 +76,13 @@
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
-                                            class="avatar-img rounded-circle" />
+                                        @if (Auth::user()->profile == null)
+                                            <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
+                                                class="avatar-img rounded-circle" />
+                                        @else
+                                            <img src="{{ asset('storage/profile/' . Auth::user()->profile) }}"
+                                                alt="..." class="avatar-img rounded-circle" />
+                                        @endif
                                     </div>
                                     <span class="profile-username">
                                         <span class="op-7">Hi,</span>
@@ -94,15 +99,22 @@
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>{{ Auth::user()->name }}</h4>
-                                                    <p class="text-muted">{{ Auth::user()->biodata ? Auth::user()->biodata->email : '-' }}</p>
+                                                    <p class="text-muted">
+                                                        {{ Auth::user()->biodata ? Auth::user()->biodata->email : '-' }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">My Profile</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="/logout">Logout</a>
+                                            @if (Auth::user()->role == 'Admin')
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/logout">Logout</a>
+                                            @else
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/profile">My Profile</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/logout">Logout</a>
+                                            @endif
                                         </li>
                                     </div>
                                 </ul>
