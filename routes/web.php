@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelolaDataSiswaController;
 use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaMapelController;
+use App\Http\Controllers\KelolaNilaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,9 +46,10 @@ Route::group(['middleware' => 'role:Admin'], function () {
     Route::delete('/admin/delete-guru/{id}', [KelolaGuruController::class, 'destroy']);
     Route::put('/admin/reset-password-guru/{id}', [KelolaGuruController::class, 'reset_password']);
 
-    Route::get('/admin/kelola-nilai', function(){
-        return view('admin.kelola-nilai');
-    });
+    Route::get('/admin/kelola-nilai', [KelolaNilaiController::class, 'index']);
+    Route::get('/admin/penilaian-siswa/{id}', [KelolaNilaiController::class, 'detail_nilai']);
+    Route::post('/admin/input-nilai', [KelolaNilaiController::class, 'store_nilai']);
+    Route::put('/admin/update-nilai/{id}', [KelolaNilaiController::class, 'update_nilai']);
 });
 
 Route::group(['middleware' => 'role:Siswa'], function () {

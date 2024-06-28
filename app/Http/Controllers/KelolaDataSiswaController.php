@@ -75,13 +75,18 @@ class KelolaDataSiswaController extends Controller
         // Mencari data user berdasarkan id
         $data = User::findOrFail($id);
         // Mencari data biodata terkait user
-        $biodata = $data->biodata;
 
         // Update data user
         $data->name = $request->name;
         $data->username = $request->username;
         $data->save();
 
+        if($data->biodata){
+            $biodata = $data->biodata;
+        }else{
+            $biodata = new Biodata();
+            $biodata->user_id = $data->id;
+        }
         // Update data biodata
         $biodata->gender = $request->gender;
         $biodata->jurusan = $request->jurusan;
