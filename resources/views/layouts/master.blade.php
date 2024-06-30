@@ -94,8 +94,13 @@
                                         <li>
                                             <div class="user-box">
                                                 <div class="avatar-lg">
-                                                    <img src="{{ asset('assets/img/profile.jpg') }}"
-                                                        alt="image profile" class="avatar-img rounded" />
+                                                    @if (Auth::user()->profile == null)
+                                                        <img src="{{ asset('assets/img/profile.jpg') }}"
+                                                            alt="image profile" class="avatar-img rounded" />
+                                                    @else
+                                                        <img src="{{ asset('storage/profile/' . Auth::user()->profile) }}"
+                                                            alt="image profile" class="avatar-img rounded" />
+                                                    @endif
                                                 </div>
                                                 <div class="u-text">
                                                     <h4>{{ Auth::user()->name }}</h4>

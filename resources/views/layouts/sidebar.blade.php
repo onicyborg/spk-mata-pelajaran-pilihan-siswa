@@ -86,6 +86,48 @@
                         </a>
                     </li>
                 @else
+                    <li class="nav-item">
+                        <a href="/siswa/dashboard">
+                            <i class="fas fa-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">Main Menu</h4>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/siswa/daftar-jurusan">
+                            <i class="fas fa-list-alt"></i>
+                            <p>Daftar Jurusan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/siswa/daftar-kepribadian">
+                            <i class="fas fa-user"></i>
+                            <p>Daftar Kepribadian</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/siswa/nilai-siswa">
+                            <i class="fas fa-graduation-cap"></i>
+                            <p>Nilai Siswa</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/siswa/ketertarikan-hasil">
+                            <i class="fas fa-heart"></i>
+                            <p>Ketertarikan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/siswa/hasil">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Hasil</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </div>

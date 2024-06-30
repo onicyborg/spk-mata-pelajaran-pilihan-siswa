@@ -23,8 +23,9 @@
                     <tr>
                         <th>No</th>
                         <th>Mata Pelajaran</th>
-                        <th>Keterangan</th>
+                        <th>Keterangan Mata Pelajaran</th>
                         <th>Nilai Siswa</th>
+                        <th>Keterangan Nilai Siswa</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                             <td>{{ $item->keterangan ? $item->keterangan : '-' }}</td>
                             <td>{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->nilai: '-' }}
                             </td>
+                            <td>{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null && $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->keterangan != null ? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->keterangan : '-' }}</td>
                             <td>
                                 @if ($nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null)
                                     <!-- Tombol untuk update nilai -->
@@ -69,6 +71,12 @@
                                                                 id="nilai{{ $no }}" name="nilai"
                                                                 value="{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->nilai: '' }}"
                                                                 required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="keterangan{{ $no }}"
+                                                                class="form-label">Keterangan</label>
+                                                            <input type="text" class="form-control"
+                                                                id="keterangan{{ $no }}" value="{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->keterangan: '' }}" name="keterangan" required>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Update</button>
                                                     </form>
@@ -105,6 +113,12 @@
                                                                 class="form-label">Nilai</label>
                                                             <input type="number" class="form-control"
                                                                 id="nilai{{ $no }}" name="nilai" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="keterangan{{ $no }}"
+                                                                class="form-label">Keterangan</label>
+                                                            <input type="text" class="form-control"
+                                                                id="keterangan{{ $no }}" name="keterangan" required>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                                     </form>

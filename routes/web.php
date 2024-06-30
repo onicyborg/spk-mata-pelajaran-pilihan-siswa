@@ -57,6 +57,9 @@ Route::group(['middleware' => 'role:Siswa'], function () {
     Route::get('/siswa/dashboard', function () {
         return view('siswa.dashboard');
     });
+    Route::get('/siswa/daftar-jurusan', function(){
+        return view('siswa.daftar-jurusan');
+    });
 });
 
 Route::group(['middleware' => 'role:Guru'], function () {

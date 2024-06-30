@@ -83,7 +83,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="nisn" class="form-label">NISN</label>
-                        <input type="text" class="form-control" id="nisn" name="username"
+                        <input type="number" class="form-control" id="nisn" name="username"
                             placeholder="Enter NISN">
                     </div>
                     <div class="mb-3">
@@ -103,7 +103,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="nip" class="form-label">NIP</label>
-                        <input type="text" class="form-control" id="nip" name="username"
+                        <input type="number" class="form-control" id="nip" name="username"
                             placeholder="Enter NIP">
                     </div>
                     <div class="mb-3">

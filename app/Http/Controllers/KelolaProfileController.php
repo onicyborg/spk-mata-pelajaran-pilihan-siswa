@@ -84,7 +84,64 @@ class KelolaProfileController extends Controller
 
             return redirect()->back()->with('success', 'Berhasil Update Data');
         } else if ($user->role == 'Siswa') {
-            return view('siswa.profile', ['siswa' => $user]);
+            $request->validate(
+                [
+                    'name' => 'required',
+                    'username' => 'required|unique:users,username,' . Auth::id(),
+                    'gender' => 'required|in:Pria,Wanita',
+                    'tempat_lahir' => 'required',
+                    'tanggal_lahir' => 'required',
+                    'kelas' => 'required'
+                ],
+                [
+                    'name.required' => 'Nama harus diisi.',
+                    'username.required' => 'NIP harus diisi.',
+                    'username.unique' => 'NIP sudah terdaftar.',
+                    'gender.required' => 'Jenis kelamin harus dipilih.',
+                    'gender.in' => 'Jenis kelamin harus Pria atau Wanita.',
+                    'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+                    'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+                    'kelas.required' => 'Kelas harus diisi'
+                ]
+            );
+
+            $user->name = $request->name;
+            $user->username = $request->username;
+
+            if ($user->biodata != null) {
+                $biodata = $user->biodata;
+
+                $biodata->gender = $request->gender;
+                $biodata->tempat_lahir = $request->tempat_lahir;
+                $biodata->tanggal_lahir = $request->tanggal_lahir;
+                $biodata->kelas = $request->kelas;
+                if ($request->email != '') {
+                    $biodata->email = $request->email;
+                }
+                if ($request->no_hp != '') {
+                    $biodata->no_hp = $request->no_hp;
+                }
+                $biodata->save();
+                $user->save();
+            } else {
+                $biodata = new Biodata();
+                $biodata->user_id = Auth::id();
+                $biodata->gender = $request->gender;
+                $biodata->tempat_lahir = $request->tempat_lahir;
+                $biodata->tanggal_lahir = $request->tanggal_lahir;
+                $biodata->kelas = $request->kelas;
+                if ($request->email != '') {
+                    $biodata->email = $request->email;
+                }
+                if ($request->no_hp != '') {
+                    $biodata->no_hp = $request->no_hp;
+                }
+
+                $biodata->save();
+                $user->save();
+            }
+
+            return redirect()->back()->with('success', 'Berhasil Update Data');
         } else {
             abort(403, 'Unauthorized');
         }
@@ -104,7 +161,10 @@ class KelolaProfileController extends Controller
 
             return redirect()->back()->with('success', 'Berhasil Ubah Password');
         } else if ($user->role == 'Siswa') {
-            return redirect()->back()->with('success', 'Berhasil Update Data');
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return redirect()->back()->with('success', 'Berhasil Ubah Password');
         } else {
             abort(403, 'Unauthorized');
         }
