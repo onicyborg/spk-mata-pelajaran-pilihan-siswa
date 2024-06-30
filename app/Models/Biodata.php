@@ -10,6 +10,17 @@ class Biodata extends Model
     use HasFactory;
 
     protected $table = 'biodata';
+    protected $fillable = [
+        'tempat_lahir',
+        'tanggal_lahir',
+        'gender',
+        'email',
+        'kelas',
+        'no_hp',
+        'jurusan',
+        'user_id',
+        'mapel_fav',
+    ];
 
     public function user()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaMapelController;
 use App\Http\Controllers\KelolaNilaiController;
 use App\Http\Controllers\KelolaProfileController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,13 @@ Route::group(['middleware' => 'role:Siswa'], function () {
     Route::get('/siswa/daftar-jurusan', function(){
         return view('siswa.daftar-jurusan');
     });
+    Route::get('/siswa/daftar-kepribadian', function(){
+        return view('siswa.daftar-kepribadian');
+    });
+    Route::get('/siswa/nilai-siswa', [SiswaController::class, 'nilai_siswa']);
+    Route::get('/siswa/ketertarikan', [SiswaController::class, 'ketertarikan']);
+    Route::post('/siswa/ubah-jurusan', [SiswaController::class, 'ubah_jurusan']);
+    Route::post('/siswa/ubah-mapel-fav', [SiswaController::class, 'ubah_mapel_fav']);
 });
 
 Route::group(['middleware' => 'role:Guru'], function () {

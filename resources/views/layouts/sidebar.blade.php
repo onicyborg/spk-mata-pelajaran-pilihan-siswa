@@ -117,7 +117,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/siswa/ketertarikan-hasil">
+                        <a href="/siswa/ketertarikan">
                             <i class="fas fa-heart"></i>
                             <p>Ketertarikan</p>
                         </a>
