@@ -36,7 +36,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">Nama: {{ $siswa->name }}</h5>
-                        <p class="card-text mt-2">NIP: {{ $siswa->username }}</p>
+                        <p class="card-text mt-2">NISN: {{ $siswa->username }}</p>
                         <p class="card-text">Kelas: {{ $siswa->biodata ? $siswa->biodata->kelas : '-' }}</p>
                         <p class="card-text">Gender: {{ $siswa->biodata ? $siswa->biodata->gender : '-' }}</p>
                         <p class="card-text">Tempat Lahir: {{ $siswa->biodata ? $siswa->biodata->tempat_lahir : '-' }}</p>

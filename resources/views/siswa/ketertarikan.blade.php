@@ -43,7 +43,7 @@
                             <span
                                 class="badge badge-success">{{ $mapel->where('id', Auth::user()->biodata->mapel_fav)->first()->nama_mapel }}</span>
                         @else
-                            <span class="badge badge-danger">Belum Memilih Jurusan</span>
+                            <span class="badge badge-danger">Belum Memilih Mata Pelajaran yang Disukai</span>
                         @endif
                         <br> <!-- Tambahkan baris ini untuk memberikan jarak antara badge dan tombol -->
                         <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#editSubjectsModal">Ubah
