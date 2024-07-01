@@ -25,6 +25,7 @@
                         <th>Mata Pelajaran</th>
                         <th>Keterangan Mata Pelajaran</th>
                         <th>Nilai Siswa</th>
+                        <th>Kriteria ketuntasan minimal (KKM)</th>
                         <th>Keterangan Nilai Siswa</th>
                         <th>Action</th>
                     </tr>
@@ -37,6 +38,7 @@
                             <td>{{ $item->keterangan ? $item->keterangan : '-' }}</td>
                             <td>{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->nilai: '-' }}
                             </td>
+                            <td>70</td>
                             <td>{{ $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null && $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->keterangan != null ? $nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first()->keterangan : '-' }}</td>
                             <td>
                                 @if ($nilai->where('user_id', $siswa->id)->where('mata_pelajaran_id', $item->id)->first() != null)
