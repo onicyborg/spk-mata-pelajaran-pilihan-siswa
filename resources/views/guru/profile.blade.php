@@ -37,11 +37,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Nama: {{ $guru->name }}</h5>
                         <p class="card-text mt-2">NIP: {{ $guru->username }}</p>
-                        <p class="card-text">Gender: {{ $guru->biodata ? $guru->biodata->gender : '-' }}</p>
-                        <p class="card-text">Tempat Lahir: {{ $guru->biodata ? $guru->biodata->tempat_lahir : '-' }}</p>
-                        <p class="card-text">Tanggal Lahir: {{ $guru->biodata ? $guru->biodata->tanggal_lahir : '-' }}</p>
-                        <p class="card-text">Email: {{ $guru->biodata ? $guru->biodata->email : '-' }}</p>
-                        <p class="card-text">No. Handphone: {{ $guru->biodata ? $guru->biodata->no_hp : '-' }}</p>
+                        <p class="card-text">Gender: {{ $guru->biodata && $guru->biodata->gender != null ? $guru->biodata->gender : '-' }}</p>
+                        <p class="card-text">Tempat Lahir: {{ $guru->biodata && $guru->biodata->tempat_lahir != null ? $guru->biodata->tempat_lahir : '-' }}</p>
+                        <p class="card-text">Tanggal Lahir: {{ $guru->biodata && $guru->biodata->tanggal_lahir != null ? $guru->biodata->tanggal_lahir : '-' }}</p>
+                        <p class="card-text">Email: {{ $guru->biodata && $guru->biodata->email != null ? $guru->biodata->email : '-' }}</p>
+                        <p class="card-text">No. Handphone: {{ $guru->biodata && $guru->biodata->no_hp != null ? $guru->biodata->no_hp : '-' }}</p>
                         <div class="d-flex justify-content-between mt-4">
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateDataModal">
                                 Update Data

@@ -37,12 +37,12 @@
                     <div class="card-body">
                         <h5 class="card-title">Nama: {{ $siswa->name }}</h5>
                         <p class="card-text mt-2">NISN: {{ $siswa->username }}</p>
-                        <p class="card-text">Kelas: {{ $siswa->biodata ? $siswa->biodata->kelas : '-' }}</p>
-                        <p class="card-text">Gender: {{ $siswa->biodata ? $siswa->biodata->gender : '-' }}</p>
-                        <p class="card-text">Tempat Lahir: {{ $siswa->biodata ? $siswa->biodata->tempat_lahir : '-' }}</p>
-                        <p class="card-text">Tanggal Lahir: {{ $siswa->biodata ? $siswa->biodata->tanggal_lahir : '-' }}</p>
-                        <p class="card-text">Email: {{ $siswa->biodata ? $siswa->biodata->email : '-' }}</p>
-                        <p class="card-text">No. Handphone: {{ $siswa->biodata ? $siswa->biodata->no_hp : '-' }}</p>
+                        <p class="card-text">Kelas: {{ $siswa->biodata && $siswa->biodata->kelas != null ? $siswa->biodata->kelas : '-' }}</p>
+                        <p class="card-text">Gender: {{ $siswa->biodata && $siswa->biodata->gender != null ? $siswa->biodata->gender : '-' }}</p>
+                        <p class="card-text">Tempat Lahir: {{ $siswa->biodata && $siswa->biodata->tempat_lahir != null ? $siswa->biodata->tempat_lahir : '-' }}</p>
+                        <p class="card-text">Tanggal Lahir: {{ $siswa->biodata && $siswa->biodata->tanggal_lahir != null ? $siswa->biodata->tanggal_lahir : '-' }}</p>
+                        <p class="card-text">Email: {{ $siswa->biodata && $siswa->biodata->email != null ? $siswa->biodata->email : '-' }}</p>
+                        <p class="card-text">No. Handphone: {{ $siswa->biodata && $siswa->biodata->no_hp != null ? $siswa->biodata->no_hp : '-' }}</p>
                         <div class="d-flex justify-content-between mt-4">
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateDataModal">
                                 Update Data
