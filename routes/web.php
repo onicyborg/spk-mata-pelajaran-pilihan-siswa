@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\KelolaDataSiswaController;
 use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaMapelController;
@@ -79,6 +80,9 @@ Route::group(['middleware' => 'role:Guru'], function () {
     Route::get('/guru/penilaian-siswa/{id}', [KelolaNilaiController::class, 'detail_nilai']);
     Route::post('/guru/input-nilai', [KelolaNilaiController::class, 'store_nilai']);
     Route::put('/guru/update-nilai/{id}', [KelolaNilaiController::class, 'update_nilai']);
+
+    Route::get('/guru/daftar-hasil-siswa', [HasilController::class, 'index']);
+    Route::get('/guru/daftar-hasil-siswa/{id}', [HasilController::class, 'hasil']);
 });
 
 Route::middleware(['auth'])->group(function () {
