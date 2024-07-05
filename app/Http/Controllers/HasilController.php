@@ -33,7 +33,7 @@ class HasilController extends Controller
 
         if ($user && $user->biodata) {
             $jurusan = $user->biodata->jurusan;
-            $mapel_fav = $user->biodata->mapel_fav->nama_mapel ?? null;
+            $mapel_fav = MataPelajaran::find($user->biodata->mapel_fav)->nama_mapel ?? null;
         } else {
             $jurusan = null;
             $mapel_fav = null;
@@ -146,7 +146,12 @@ class HasilController extends Controller
         arsort($sorted_saw_results); // Urutkan salinan dari $saw_results
 
         $recommended_package = key($sorted_saw_results); // Ambil kunci dari array yang sudah diurutkan
-
-        return view('guru.detail-hasil', compact('nilaiArray', 'jurusan', 'mapel_fav', 'saw_results', 'recommended_package', 'recommended_packages'));
+        if(Auth::user()->role == 'Guru'){
+            return view('guru.detail-hasil', compact('nilaiArray', 'jurusan', 'mapel_fav', 'saw_results', 'recommended_package', 'recommended_packages', 'user'));
+        }else if(Auth::user()->role = 'Siswa'){
+            return view('siswa.hasil', compact('nilaiArray', 'jurusan', 'mapel_fav', 'saw_results', 'recommended_package', 'recommended_packages', 'user'));
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 }

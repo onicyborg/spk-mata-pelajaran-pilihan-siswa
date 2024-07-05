@@ -69,6 +69,8 @@ Route::group(['middleware' => 'role:Siswa'], function () {
     Route::get('/siswa/ketertarikan', [SiswaController::class, 'ketertarikan']);
     Route::post('/siswa/ubah-jurusan', [SiswaController::class, 'ubah_jurusan']);
     Route::post('/siswa/ubah-mapel-fav', [SiswaController::class, 'ubah_mapel_fav']);
+
+    Route::get('/siswa/hasil/{id}', [HasilController::class, 'hasil']);
 });
 
 Route::group(['middleware' => 'role:Guru'], function () {

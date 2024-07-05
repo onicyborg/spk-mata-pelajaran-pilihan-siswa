@@ -123,7 +123,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/siswa/hasil">
+                        <a href="/siswa/hasil/{{ Auth::id() }}">
                             <i class="fas fa-chart-bar"></i>
                             <p>Hasil</p>
                         </a>
