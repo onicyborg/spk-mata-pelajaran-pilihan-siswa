@@ -38,11 +38,24 @@
                             <td>{{ $item->biodata != null ? $item->biodata->gender : '-' }}</td>
                             <td>{{ $item->biodata != null ? $item->biodata->jurusan : '-' }}</td>
                             <td>
-
-                                <!-- Tombol untuk menghapus data diubah menjadi tag <a> -->
-                                <a href="/guru/daftar-hasil-siswa/{{ $item->id }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-clipboard-check"></i>
-                                </a>
+                                @php
+                                    $disable = 't';
+                                @endphp
+                                @foreach ($mapel as $i)
+                                    @if ($nilai->where('mata_pelajaran_id', $i->id)->where('user_id', $item->id)->count() == 0)
+                                        @php
+                                            $disable = 'y';
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($disable == 'y')
+                                    <button class="btn btn-info btn-sm disabled"><i
+                                            class="fas fa-clipboard-check"></i></button>
+                                @else
+                                    <a href="/guru/daftar-hasil-siswa/{{ $item->id }}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-clipboard-check"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

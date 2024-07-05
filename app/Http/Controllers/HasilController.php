@@ -15,11 +15,12 @@ class HasilController extends Controller
     {
         $data = User::where('role', 'Siswa')->get();
         $mapel = MataPelajaran::all();
+        $nilai = Nilai::all();
 
         if (Auth::user()->role == 'Siswa') {
             return view('admin.kelola-nilai', ['data' => $data, 'mapel' => $mapel]);
         } else if (Auth::user()->role == 'Guru') {
-            return view('guru.hasil', ['data' => $data, 'mapel' => $mapel]);
+            return view('guru.hasil', ['data' => $data, 'mapel' => $mapel, 'nilai' => $nilai]);
         } else {
             abort(403, 'Unauthorized');
         }
