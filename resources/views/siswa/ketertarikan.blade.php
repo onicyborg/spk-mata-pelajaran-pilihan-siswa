@@ -106,9 +106,16 @@
                                 <option @if (Auth::user()->biodata == null || Auth::user()->biodata->mapel_fav == null) selected @endif disabled hidden>- Pilih Mata
                                     Pelajaran -</option>
                                 @foreach ($mapel as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ Auth::user()->biodata != null && Auth::user()->biodata->mapel_fav == $item->id ? 'selected' : '' }}>
-                                        {{ $item->nama_mapel }}</option>
+                                    @if (
+                                        $item->nama_mapel == 'IPA' ||
+                                            $item->nama_mapel == 'Matematika' ||
+                                            $item->nama_mapel == 'Informatika' ||
+                                            $item->nama_mapel == 'IPS' ||
+                                            $item->nama_mapel == 'Bahasa Indonesia')
+                                        <option value="{{ $item->id }}"
+                                            {{ Auth::user()->biodata != null && Auth::user()->biodata->mapel_fav == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama_mapel }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
