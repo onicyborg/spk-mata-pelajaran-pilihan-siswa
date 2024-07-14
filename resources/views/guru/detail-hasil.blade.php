@@ -19,106 +19,80 @@
 
         <div class="row">
             <!-- Card Perhitungan SAW -->
+            <!-- Card Perhitungan SAW -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Perhitungan SAW</h4>
-                        <p><strong>Jurusan: </strong>{{ $jurusan }}</p>
-                        <p><strong>Mata Pelajaran yang Disukai: </strong>{{ $mapel_fav }}</p>
+                        <p><strong>Nilai Kriteria:</strong></p>
+                        <ul>
+                            <li>C1 (Mapel yang disukai): {{ $mapel_fav }} ({{ $c1 }})</li>
+                            <li>C2 (Jurusan yang dipilih): {{ $jurusan }} ({{ $c2 }})</li>
+                            <li>C3 (Nilai Matematika): {{ $c3 }}</li>
+                            <li>C4 (Nilai IPA): {{ $c4 }}</li>
+                            <li>C5 (Nilai IPS): {{ $c5 }}</li>
+                        </ul>
 
-                        <!-- Matriks Keputusan -->
-                        <h5 class="mt-4">1. Matriks Keputusan</h5>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Nilai</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($nilaiArray as $mapel => $value)
-                                    <tr>
-                                        <td>{{ $mapel }}</td>
-                                        <td>{{ $value }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <p><strong>Normalisasi Nilai:</strong></p>
+                        <ul>
+                            <li>C1': {{ $c1_normalized }}</li>
+                            <li>C2': {{ $c2_normalized }}</li>
+                            <li>C3': {{ $c3_normalized }}</li>
+                            <li>C4': {{ $c4_normalized }}</li>
+                            <li>C5': {{ $c5_normalized }}</li>
+                        </ul>
 
-                        @php
-                            $no = 2;
-                        @endphp
+                        <p><strong>Bobot Kriteria:</strong></p>
+                        <ul>
+                            <li>C1: 0.30</li>
+                            <li>C2: 0.25</li>
+                            <li>C3: 0.20</li>
+                            <li>C4: 0.15</li>
+                            <li>C5: 0.10</li>
+                        </ul>
 
-                        @foreach ($saw_results as $package => $result)
-                            <!-- Tampilkan Matriks Normalisasi -->
-                            <h5 class="mt-4">{{ $no }}. Matriks Normalisasi untuk {{ $package }}</h5>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Mata Pelajaran</th>
-                                        <th>Nilai Normalisasi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($result['normalized_matrix'] as $mapel => $value)
-                                        <tr>
-                                            <td>{{ $mapel }}</td>
-                                            <td>{{ number_format($value, 2) }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            @php
-                                $no++;
-                            @endphp
-                            <!-- Tampilkan Matriks Normalisasi Terbobot -->
-                            <h5 class="mt-4">{{ $no }}. Matriks Normalisasi Terbobot untuk {{ $package }}</h5>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Mata Pelajaran</th>
-                                        <th>Nilai Normalisasi Terbobot</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($result['weighted_matrix'] as $mapel => $value)
-                                        <tr>
-                                            <td>{{ $mapel }}</td>
-                                            <td>{{ number_format($value, 2) }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            @php
-                                $no++;
-                            @endphp
-                            <!-- Tampilkan Hasil Akhir -->
-                            <h5 class="mt-4">{{ $no }}. Hasil Akhir untuk {{ $package }}</h5>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Paket Mata Pelajaran</th>
-                                        <th>Nilai Akhir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $package }}</td>
-                                        <td>{{ number_format($result['final_score'], 2) }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            @php
-                                $no++;
-                            @endphp
-                        @endforeach
+                        <p><strong>Perhitungan Skor SAW:</strong></p>
+                        <p>S = ({{ $c1_normalized }} x 0.30) + ({{ $c2_normalized }} x 0.25) + ({{ $c3_normalized }} ×
+                            0.20) + ({{ $c4_normalized }} x 0.15) + ({{ $c5_normalized }} x 0.10)</p>
+                        <p>S = {{ $s_saw }}</p>
 
-                        <h5 class="mt-4">Rekomendasi Paket Mata Pelajaran: {{ $recommended_package }}</h5>
-                        <p>Mata pelajaran yang termasuk: <strong>
-                            @foreach ($recommended_packages[$recommended_package] as $mapel)
-                                {{ $mapel }},
-                            @endforeach
-                        </strong></p>
+                        <p><strong>Hasil Rekomendasi:</strong></p>
+                        <p>Nilai akhir dari perhitungan data anda adalah {{ $s_saw }} dan nilai tersebut masuk dalam
+                            kategori {{ $recommendedPaket_saw }} karena nilainya
+                            {{ $recommendedPaket_saw == 'Paket 1' ? '>= 0.70' : '< 0.70' }}</p>
+                        <p>Sehingga paket yang direkomendasikan untuk anda adalah: {{ $recommendedPaket_saw }}</p>
+
+                        @if ($recommendedPaket_saw == 'Paket 1')
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Fisika</li>
+                                <li>Matematika Lanjut</li>
+                                <li>Informatika</li>
+                                <li>Biologi</li>
+                                <li>Kimia</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @else
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Ekonomi</li>
+                                <li>Matematika</li>
+                                <li>Sosiologi</li>
+                                <li>Geografi</li>
+                                <li>Sejarah</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -128,7 +102,73 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Perhitungan WP</h4>
-                        <p>Proses perhitungan WP akan ditambahkan di sini.</p>
+                        <p><strong>Nilai Kriteria:</strong></p>
+                        <ul>
+                            <li>C1 (Mapel yang disukai): {{ $mapel_fav }} ({{ $c1 }})</li>
+                            <li>C2 (Jurusan yang dipilih): {{ $jurusan }} ({{ $c2 }})</li>
+                            <li>C3 (Nilai Matematika): {{ $c3 }}</li>
+                            <li>C4 (Nilai IPA): {{ $c4 }}</li>
+                            <li>C5 (Nilai IPS): {{ $c5 }}</li>
+                        </ul>
+
+                        <p><strong>Normalisasi Nilai:</strong></p>
+                        <ul>
+                            <li>C3': {{ $c3_normalized }}</li>
+                            <li>C4': {{ $c4_normalized }}</li>
+                            <li>C5': {{ $c5_normalized }}</li>
+                        </ul>
+
+                        <p><strong>Bobot Kriteria:</strong></p>
+                        <ul>
+                            <li>C1: 0.30</li>
+                            <li>C2: 0.25</li>
+                            <li>C3: 0.20</li>
+                            <li>C4: 0.15</li>
+                            <li>C5: 0.10</li>
+                        </ul>
+
+                        <p><strong>Perhitungan Nilai Vektor S:</strong></p>
+                        <p>S = ({{ $c1 }}^0.30) × ({{ $c2 }}^0.25) × ({{ $c3_normalized }}^0.20) ×
+                            ({{ $c4_normalized }}^0.15) × ({{ $c5_normalized }}^0.10)</p>
+                        <p>S = {{ $s_wp }}</p>
+
+                        <p><strong>Hasil Rekomendasi:</strong></p>
+                        <p>Nilai akhir dari perhitungan data anda adalah {{ $s_wp }} dan nilai tersebut masuk dalam
+                            kategori {{ $recommendedPaket_wp }} karena nilainya
+                            {{ $recommendedPaket_wp == 'Paket 1' ? '>= 2.0' : '< 2.0' }}</p>
+                        <p>Sehingga paket yang direkomendasikan untuk anda adalah: {{ $recommendedPaket_wp }}</p>
+
+                        @if ($recommendedPaket_wp == 'Paket 1')
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Fisika</li>
+                                <li>Matematika Lanjut</li>
+                                <li>Informatika</li>
+                                <li>Biologi</li>
+                                <li>Kimia</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @else
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Ekonomi</li>
+                                <li>Matematika</li>
+                                <li>Sosiologi</li>
+                                <li>Geografi</li>
+                                <li>Sejarah</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

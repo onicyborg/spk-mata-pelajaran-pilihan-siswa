@@ -17,7 +17,28 @@ class SiswaController extends Controller
         $data = MataPelajaran::all();
         $nilai = Nilai::all();
 
-        return view('siswa.nilai-siswa', ['siswa' => $siswa, 'data' => $data, 'nilai' => $nilai]);
+        $biodata = Biodata::where('user_id', Auth::id())->first();
+        $c1 = MataPelajaran::where('id', $biodata->mapel_fav ?? null)->first();
+        $c2 = $biodata->jurusan ?? null;
+
+        $id_c3 = MataPelajaran::where('nama_mapel', 'Matematika')->first()->id ?? null;
+        $c3 =
+            Nilai::where('mata_pelajaran_id', $id_c3)->where('user_id', Auth::id())->first()->nilai ??
+            null;
+
+        $id_c4 = MataPelajaran::where('nama_mapel', 'IPA')->first()->id ?? null;
+        $c4 =
+            Nilai::where('mata_pelajaran_id', $id_c4)->where('user_id', Auth::id())->first()->nilai ??
+            null;
+
+        $id_c5 = MataPelajaran::where('nama_mapel', 'IPS')->first()->id ?? null;
+        $c5 =
+            Nilai::where('mata_pelajaran_id', $id_c5)->where('user_id', Auth::id())->first()->nilai ??
+            null;
+
+        $isProfileComplete = $c1 && $c2 && $c3 && $c4 && $c5;
+
+        return view('siswa.nilai-siswa', ['siswa' => $siswa, 'data' => $data, 'nilai' => $nilai, 'isProfileComplete' => $isProfileComplete]);
     }
 
     public function ketertarikan()

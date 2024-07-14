@@ -19,11 +19,80 @@
 
         <div class="row">
             <!-- Card Perhitungan SAW -->
+            <!-- Card Perhitungan SAW -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Perhitungan SAW</h4>
-                        <!-- Letakkan perhitungan SAW di sini jika diperlukan -->
+                        <p><strong>Nilai Kriteria:</strong></p>
+                        <ul>
+                            <li>C1 (Mapel yang disukai): {{ $mapel_fav }} ({{ $c1 }})</li>
+                            <li>C2 (Jurusan yang dipilih): {{ $jurusan }} ({{ $c2 }})</li>
+                            <li>C3 (Nilai Matematika): {{ $c3 }}</li>
+                            <li>C4 (Nilai IPA): {{ $c4 }}</li>
+                            <li>C5 (Nilai IPS): {{ $c5 }}</li>
+                        </ul>
+
+                        <p><strong>Normalisasi Nilai:</strong></p>
+                        <ul>
+                            <li>C1': {{ $c1_normalized }}</li>
+                            <li>C2': {{ $c2_normalized }}</li>
+                            <li>C3': {{ $c3_normalized }}</li>
+                            <li>C4': {{ $c4_normalized }}</li>
+                            <li>C5': {{ $c5_normalized }}</li>
+                        </ul>
+
+                        <p><strong>Bobot Kriteria:</strong></p>
+                        <ul>
+                            <li>C1: 0.30</li>
+                            <li>C2: 0.25</li>
+                            <li>C3: 0.20</li>
+                            <li>C4: 0.15</li>
+                            <li>C5: 0.10</li>
+                        </ul>
+
+                        <p><strong>Perhitungan Skor SAW:</strong></p>
+                        <p>S = ({{ $c1_normalized }} × 0.30) + ({{ $c2_normalized }} × 0.25) + ({{ $c3_normalized }} ×
+                            0.20) + ({{ $c4_normalized }} × 0.15) + ({{ $c5_normalized }} × 0.10)</p>
+                        <p>S = {{ $s_saw }}</p>
+
+                        <p><strong>Hasil Rekomendasi:</strong></p>
+                        <p>Nilai akhir dari perhitungan data anda adalah {{ $s_saw }} dan nilai tersebut masuk dalam
+                            kategori {{ $recommendedPaket_saw }} karena nilainya
+                            {{ $recommendedPaket_saw == 'Paket 1' ? '>= 0.70' : '< 0.70' }}</p>
+                        <p>Sehingga paket yang direkomendasikan untuk anda adalah: {{ $recommendedPaket_saw }}</p>
+
+                        @if ($recommendedPaket_saw == 'Paket 1')
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Fisika</li>
+                                <li>Matematika Lanjut</li>
+                                <li>Informatika</li>
+                                <li>Biologi</li>
+                                <li>Kimia</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @else
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
+                            <ul>
+                                <li>Ekonomi</li>
+                                <li>Matematika</li>
+                                <li>Sosiologi</li>
+                                <li>Geografi</li>
+                                <li>Sejarah</li>
+                                <li>Bhs Indonesia</li>
+                                <li>Bhs Inggris</li>
+                                <li>Seni Budaya dan Prakarya</li>
+                                <li>Pancasila</li>
+                                <li>PJOK</li>
+                                <li>Agama</li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -59,18 +128,18 @@
                         </ul>
 
                         <p><strong>Perhitungan Nilai Vektor S:</strong></p>
-                        <p>S = ({{ $c1 }}^0.30) x ({{ $c2 }}^0.25) x ({{ $c3_normalized }}^0.20) x
-                            ({{ $c4_normalized }}^0.15) x ({{ $c5_normalized }}^0.10)</p>
-                        <p>S = {{ $s }}</p>
+                        <p>S = ({{ $c1 }}^0.30) × ({{ $c2 }}^0.25) × ({{ $c3_normalized }}^0.20) ×
+                            ({{ $c4_normalized }}^0.15) × ({{ $c5_normalized }}^0.10)</p>
+                        <p>S = {{ $s_wp }}</p>
 
                         <p><strong>Hasil Rekomendasi:</strong></p>
-                        <p>Nilai akhir dari perhitungan data anda adalah {{ $s }} dan nilai tersebut masuk dalam
-                            kategori <strong>{{ $recommendedPaket == 'Paket 1' ? 'Paket Mata Pelajaran Pendukung 1' : 'Paket Mata Pelajaran Pendukung 2' }}</strong> karena nilainya
-                            {{ $recommendedPaket == 'Paket 1' ? '> 2' : '< 2' }}</p>
-                        <p>Sehingga paket yang direkomendasikan untuk anda adalah: <strong>{{ $recommendedPaket == 'Paket 1' ? 'Paket Mata Pelajaran Pendukung 1' : 'Paket Mata Pelajaran Pendukung 2' }}</strong></p>
+                        <p>Nilai akhir dari perhitungan data anda adalah {{ $s_wp }} dan nilai tersebut masuk dalam
+                            kategori {{ $recommendedPaket_wp }} karena nilainya
+                            {{ $recommendedPaket_wp == 'Paket 1' ? '>= 2.0' : '< 2.0' }}</p>
+                        <p>Sehingga paket yang direkomendasikan untuk anda adalah: {{ $recommendedPaket_wp }}</p>
 
-                        @if ($recommendedPaket == 'Paket 1')
-                            <p>Mata pelajaran pendukung yang direkomendasikan mencakup:</p>
+                        @if ($recommendedPaket_wp == 'Paket 1')
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
                             <ul>
                                 <li>Fisika</li>
                                 <li>Matematika Lanjut</li>
@@ -85,7 +154,7 @@
                                 <li>Agama</li>
                             </ul>
                         @else
-                            <p>Mata pelajaran pendukung yang direkomendasikan mencakup:</p>
+                            <p>Mata pelajaran pendukung yang direkomendasikan:</p>
                             <ul>
                                 <li>Ekonomi</li>
                                 <li>Matematika</li>
@@ -100,7 +169,6 @@
                                 <li>Agama</li>
                             </ul>
                         @endif
-
                     </div>
                 </div>
             </div>

@@ -38,24 +38,9 @@
                             <td>{{ $item->biodata != null ? $item->biodata->gender : '-' }}</td>
                             <td>{{ $item->biodata != null ? $item->biodata->jurusan : '-' }}</td>
                             <td>
-                                @php
-                                    $disable = 't';
-                                @endphp
-                                @foreach ($mapel as $i)
-                                    @if ($nilai->where('mata_pelajaran_id', $i->id)->where('user_id', $item->id)->count() == 0)
-                                        @php
-                                            $disable = 'y';
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                @if ($disable == 'y')
-                                    <button class="btn btn-info btn-sm disabled"><i
-                                            class="fas fa-clipboard-check"></i></button>
-                                @else
-                                    <a href="/guru/daftar-hasil-siswa/{{ $item->id }}" class="btn btn-info btn-sm">
-                                        <i class="fas fa-clipboard-check"></i>
-                                    </a>
-                                @endif
+                                <a href="/guru/daftar-hasil-siswa/{{ $item->id }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -72,4 +57,61 @@
             $('#siswaTable').DataTable();
         });
     </script>
+
+    @if ($errors->any())
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ implode(', ', $errors->all()) }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            swal({
+                title: "Sukses!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-success",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
 @endpush

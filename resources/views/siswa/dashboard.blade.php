@@ -526,3 +526,62 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @if ($errors->any())
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ implode(', ', $errors->all()) }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            swal({
+                title: "Sukses!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-success",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+@endpush
