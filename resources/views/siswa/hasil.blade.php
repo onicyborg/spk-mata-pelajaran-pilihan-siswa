@@ -52,8 +52,8 @@
                         </ul>
 
                         <p><strong>Perhitungan Skor SAW:</strong></p>
-                        <p>S = ({{ $c1_normalized }} × 0.30) + ({{ $c2_normalized }} × 0.25) + ({{ $c3_normalized }} ×
-                            0.20) + ({{ $c4_normalized }} × 0.15) + ({{ $c5_normalized }} × 0.10)</p>
+                        <p>S = ({{ $c1_normalized }} x 0.30) + ({{ $c2_normalized }} x 0.25) + ({{ $c3_normalized }} ×
+                            0.20) + ({{ $c4_normalized }} x 0.15) + ({{ $c5_normalized }} x 0.10)</p>
                         <p>S = {{ $s_saw }}</p>
 
                         <p><strong>Hasil Rekomendasi:</strong></p>

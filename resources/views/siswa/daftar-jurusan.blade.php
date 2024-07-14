@@ -106,16 +106,66 @@
             <h4 class="fw-bold mb-3">Paling Sedikit Diminati</h4>
             @php
                 $jurusanSedikitDiminati = [
-                    ['Sastra Jawa', asset('assets/img/sastra-jawa.svg'), 'Studi tentang bahasa, sastra, dan budaya Jawa.', 'Kurikulum meliputi: Sastra Jawa Klasik, Sastra Jawa Modern, Sejarah dan Kebudayaan Jawa.'],
-                    ['Sastra Rusia', asset('assets/img/sastra-rusia.svg'), 'Fokus pada bahasa dan sastra Rusia.', 'Kurikulum meliputi: Sastra Rusia Klasik, Sastra Rusia Modern, Sastra Soviet.'],
-                    ['Sastra Belanda', asset('assets/img/sastra-belanda.svg'), 'Studi tentang bahasa dan sastra Belanda.', 'Kurikulum meliputi: Sastra Belanda Klasik, Sastra Belanda Modern, Sastra Flamand.'],
-                    ['Mikrobiologi Pertanian', asset('assets/img/mikrobiologi.svg'), 'Ilmu tentang mikroorganisme dalam pertanian.', 'Kurikulum meliputi: Mikrobiologi Tanah, Mikrobiologi Tumbuhan, Biokimia Pertanian.'],
-                    ['Manajemen Sumber Daya Akuatik', asset('assets/img/akuatik.svg'), 'Fokus pada pengelolaan sumber daya air dan ekosistemnya.', 'Kurikulum meliputi: Ekologi Perairan, Teknologi Akuakultur, Konservasi Sumber Daya Akuatik.'],
-                    ['Hasil Perikanan', asset('assets/img/fisher.svg'), 'Ilmu tentang produksi dan pengelolaan produk perikanan.', 'Kurikulum meliputi: Teknik Perikanan, Pengolahan Hasil Perikanan, Pemasaran Produk Perikanan.'],
-                    ['Sastra Jerman', asset('assets/img/jerman.svg'), 'Studi tentang bahasa dan sastra Jerman.', 'Kurikulum meliputi: Sastra Jerman Klasik, Sastra Jerman Modern, Sejarah dan Budaya Jerman.'],
-                    ['Geofisika', asset('assets/img/geofisika.svg'), 'Ilmu tentang fisika bumi dan sekitarnya.', 'Kurikulum meliputi: Geologi Struktur, Seismologi, Geofisika Terapan.'],
-                    ['Akuakultur', asset('assets/img/akuakultur.svg'), 'Fokus pada budidaya organisme air.', 'Kurikulum meliputi: Manajemen Akuakultur, Nutrisi Organisme Air, Teknik Budidaya Organisme Air.'],
-                    ['Sastra Perancis', asset('assets/img/prancis.svg'), 'Studi tentang bahasa dan sastra Perancis.', 'Kurikulum meliputi: Sastra Perancis Klasik, Sastra Perancis Modern, Sastra Belgia.'],
+                    [
+                        'Sastra Jawa',
+                        asset('assets/img/sastra-jawa.svg'),
+                        'Studi tentang bahasa, sastra, dan budaya Jawa.',
+                        'Kurikulum meliputi: Sastra Jawa Klasik, Sastra Jawa Modern, Sejarah dan Kebudayaan Jawa.',
+                    ],
+                    [
+                        'Sastra Rusia',
+                        asset('assets/img/sastra-rusia.svg'),
+                        'Fokus pada bahasa dan sastra Rusia.',
+                        'Kurikulum meliputi: Sastra Rusia Klasik, Sastra Rusia Modern, Sastra Soviet.',
+                    ],
+                    [
+                        'Sastra Belanda',
+                        asset('assets/img/sastra-belanda.svg'),
+                        'Studi tentang bahasa dan sastra Belanda.',
+                        'Kurikulum meliputi: Sastra Belanda Klasik, Sastra Belanda Modern, Sastra Flamand.',
+                    ],
+                    [
+                        'Mikrobiologi Pertanian',
+                        asset('assets/img/mikrobiologi.svg'),
+                        'Ilmu tentang mikroorganisme dalam pertanian.',
+                        'Kurikulum meliputi: Mikrobiologi Tanah, Mikrobiologi Tumbuhan, Biokimia Pertanian.',
+                    ],
+                    [
+                        'Manajemen Sumber Daya Akuatik',
+                        asset('assets/img/akuatik.svg'),
+                        'Fokus pada pengelolaan sumber daya air dan ekosistemnya.',
+                        'Kurikulum meliputi: Ekologi Perairan, Teknologi Akuakultur, Konservasi Sumber Daya Akuatik.',
+                    ],
+                    [
+                        'Hasil Perikanan',
+                        asset('assets/img/fisher.svg'),
+                        'Ilmu tentang produksi dan pengelolaan produk perikanan.',
+                        'Kurikulum meliputi: Teknik Perikanan, Pengolahan Hasil Perikanan, Pemasaran Produk Perikanan.',
+                    ],
+                    [
+                        'Sastra Jerman',
+                        asset('assets/img/jerman.svg'),
+                        'Studi tentang bahasa dan sastra Jerman.',
+                        'Kurikulum meliputi: Sastra Jerman Klasik, Sastra Jerman Modern, Sejarah dan Budaya Jerman.',
+                    ],
+                    [
+                        'Geofisika',
+                        asset('assets/img/geofisika.svg'),
+                        'Ilmu tentang fisika bumi dan sekitarnya.',
+                        'Kurikulum meliputi: Geologi Struktur, Seismologi, Geofisika Terapan.',
+                    ],
+                    [
+                        'Akuakultur',
+                        asset('assets/img/akuakultur.svg'),
+                        'Fokus pada budidaya organisme air.',
+                        'Kurikulum meliputi: Manajemen Akuakultur, Nutrisi Organisme Air, Teknik Budidaya Organisme Air.',
+                    ],
+                    [
+                        'Sastra Perancis',
+                        asset('assets/img/prancis.svg'),
+                        'Studi tentang bahasa dan sastra Perancis.',
+                        'Kurikulum meliputi: Sastra Perancis Klasik, Sastra Perancis Modern, Sastra Belgia.',
+                    ],
                 ];
             @endphp
 
@@ -137,4 +187,60 @@
 @endsection
 
 @push('scripts')
+    @if ($errors->any())
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ implode(', ', $errors->all()) }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            swal({
+                title: "Error!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            swal({
+                title: "Sukses!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "Ok",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-success",
+                        closeModal: true,
+                    },
+                },
+            });
+        </script>
+    @endif
 @endpush

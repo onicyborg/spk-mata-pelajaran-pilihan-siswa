@@ -56,9 +56,7 @@ Route::group(['middleware' => 'role:Admin'], function () {
 });
 
 Route::group(['middleware' => 'role:Siswa'], function () {
-    Route::get('/siswa/dashboard', function () {
-        return view('siswa.dashboard');
-    });
+    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard']);
     Route::get('/siswa/daftar-jurusan', function(){
         return view('siswa.daftar-jurusan');
     });
